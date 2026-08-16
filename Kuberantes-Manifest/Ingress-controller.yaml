@@ -4,15 +4,15 @@ metadata:
   name: devops-ingress
   namespace: default
   annotations:
-      # 1. Native safe way to rewrite session cookies over plain HTTP
-    nginx.ingress.kubernetes.io/session-cookie-conditional-samesite: "None"
-    # 2. Native safe way to fix the 302 location redirects
-    nginx.ingress.kubernetes.io/proxy-redirect-from: "off"
-    kubernetes.io/ingress.class: nginx
+     kubernetes.io/ingress.class: nginx
+    # Enables NGINX-managed session routing
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    # Controls protocol mapping
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/proxy-redirect-default: "true"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/proxy-redirect-from: "http://localhost:8080/"
+    nginx.ingress.kubernetes.io/proxy-redirect-from: "off"
 spec:
   rules:
   - http:
