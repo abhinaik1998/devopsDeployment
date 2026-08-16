@@ -4,7 +4,7 @@ metadata:
   name: devops-ingress
   namespace: default
   annotations:
-     kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: nginx
     # Enables NGINX-managed session routing
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-name: "route"
