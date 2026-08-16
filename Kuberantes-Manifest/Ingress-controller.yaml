@@ -4,6 +4,11 @@ metadata:
   name: devops-ingress
   namespace: default
   annotations:
+      # 1. Strips the "Secure" flag from cookies so your browser accepts them over HTTP
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_cookie_flags ~ nosecure;
+    # 2. Forces NGINX to fix the 302 redirect location back to your public AWS URL
+    nginx.ingress.kubernetes.io/proxy-redirect-from: "off"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-redirect-default: "true"
